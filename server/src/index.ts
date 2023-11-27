@@ -1,4 +1,4 @@
-import fastify, { FastifyRequest } from "fastify";
+import fastify, { FastifyRequest, onRequestHookHandler } from "fastify";
 import cors from "@fastify/cors";
 import { initializeApp } from "firebase-admin/app";
 import { credential } from "firebase-admin";
@@ -6,7 +6,7 @@ import { getMessaging } from "firebase-admin/messaging";
 import applicationDefault = credential.applicationDefault;
 import { FreeHugBody } from "./common/models";
 
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
 initializeApp({
@@ -15,7 +15,24 @@ initializeApp({
 });
 
 const server = fastify();
-server.register(cors, { origin: "*", methods: ["GET"] });
+
+const checkHeaderMiddleware: onRequestHookHandler = (req, reply, done) => {
+  const expectedHeaderValue = process.env.SECRET;
+
+  // Replace 'your_header_name' with the actual header name you want to check
+  const actualHeaderValue = req.headers["authorization"];
+
+  if (actualHeaderValue === expectedHeaderValue) {
+    // The expected value is present in the header
+    done();
+  } else {
+    // The expected value is not present, respond with an error
+    reply.code(401).send("Not Authorized");
+  }
+};
+
+// Register the middleware for every route
+server.addHook("onRequest", checkHeaderMiddleware);
 
 var splashScreenMessage = "Ich <3 dich mein Schatz !!!";
 
@@ -49,9 +66,7 @@ server.post(
           },
         },
       })
-      .then((result) => {
-        console.log(request.body);
-      });
+      .then((result) => {});
   },
 );
 

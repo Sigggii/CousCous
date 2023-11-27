@@ -1,3 +1,4 @@
+import { SECRET } from "@env"
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 import messaging from "@react-native-firebase/messaging"
 import {
@@ -5,11 +6,11 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native"
+import axios from "axios"
 import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
 import { useContext, useEffect, useState } from "react"
-import { useColorScheme } from "react-native"
-import DeviceInfo from "react-native-device-info"
+import { useColorScheme, Vibration } from "react-native"
 
 import { userConfigs } from "../common/Config"
 import {
@@ -17,6 +18,7 @@ import {
   CurrentUserProvider,
 } from "../common/CurrentUserProvider"
 import { getSplashMessage } from "../common/axios/SplashScreenAPI"
+import { freeHugsTopicPrefix } from "../common/models"
 import { CustomSplashScreen } from "../components/common/CustomSplashScreen"
 import { LoginScreen } from "../components/common/LoginScreen"
 
@@ -40,6 +42,7 @@ export default function RootLayout() {
   })
 
   const [splashMessage, setSpashMessage] = useState<string>()
+  axios.defaults.headers.common["Authorization"] = SECRET
 
   getSplashMessage().then((result) => {
     setSpashMessage(result)
@@ -55,6 +58,14 @@ export default function RootLayout() {
       SplashScreen.hideAsync()
     }
   }, [loaded, splashMessage])
+
+  useEffect(() => {
+    return messaging().onMessage(async (remoteMessage) => {
+      if (remoteMessage.from?.startsWith("/topics/" + freeHugsTopicPrefix)) {
+        Vibration.vibrate([500, 800, 600, 800])
+      }
+    })
+  }, [])
 
   if (!loaded || !splashMessage) {
     return null

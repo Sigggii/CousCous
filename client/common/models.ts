@@ -1,10 +1,13 @@
 export type UserNames = "Cucumber" | "Jona"
 
+export const freeHugsTopicPrefix = __DEV__ ? "test-free-hugs-" : "free-hugs-"
+export type FreeHugsTopicPrefix = typeof freeHugsTopicPrefix
+
 export type UserConfig = {
   name: UserNames
   realName: string
-  freeHugTopicReceive: `free-hugs-${UserNames}`
-  freeHugTopicSend: `free-hugs-${UserNames}`
+  freeHugTopicReceive: `${FreeHugsTopicPrefix}${UserNames}`
+  freeHugTopicSend: `${FreeHugsTopicPrefix}${UserNames}`
 }
 
 export type UserConfigs = Record<UserNames, UserConfig>
