@@ -32,7 +32,7 @@ const checkHeaderMiddleware: onRequestHookHandler = (req, reply, done) => {
 };
 
 // Register the middleware for every route
-server.addHook("onRequest", checkHeaderMiddleware);
+//server.addHook("onRequest", checkHeaderMiddleware);
 
 var splashScreenMessage = "Ich <3 dich mein Schatz !!!";
 
