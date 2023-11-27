@@ -27,7 +27,7 @@ const checkHeaderMiddleware: onRequestHookHandler = (req, reply, done) => {
     done();
   } else {
     // The expected value is not present, respond with an error
-    reply.code(401).send("Not Authorized");
+    reply.code(401).send("Not Authorized ABC");
   }
 };
 
