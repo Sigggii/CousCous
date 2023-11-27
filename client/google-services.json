@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751382257811",
+    "project_id": "couscous-c9fe7",
+    "storage_bucket": "couscous-c9fe7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751382257811:android:a0462b3e973f8404866d66",
+        "android_client_info": {
+          "package_name": "com.CousCous.CousCous"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD73r2jJj9lHHOgsVATwJYdcGjfuTH89FU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

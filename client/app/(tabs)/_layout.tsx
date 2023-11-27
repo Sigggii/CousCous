@@ -1,40 +1,44 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { MaterialIcons } from "@expo/vector-icons"
+import FontAwesome from "@expo/vector-icons/FontAwesome"
+import { Link, Tabs } from "expo-router"
+import { Pressable, useColorScheme } from "react-native"
 
-import Colors from '../../constants/Colors';
+import Colors from "../../constants/Colors"
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
+  name: React.ComponentProps<typeof FontAwesome>["name"]
+  color: string
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />
 }
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Hugs',
-          tabBarIcon: ({ color }) => <TabBarIcon name="heartbeat" color={color} />,
+          title: "Free Hugs",
+          message: "Hugs",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="heartbeat" color={color} />
+          ),
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/settings" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
+                  <MaterialIcons
+                    name="settings"
                     size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
+                    color={Colors[colorScheme ?? "light"].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
@@ -44,12 +48,28 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="todo"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "ToDo",
+          message: "Tab Two",
+          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
+          // ToDo make settings globally in header, so I dont have to do it for every page separatly
+          headerRight: () => (
+            <Link href="/settings" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <MaterialIcons
+                    name="settings"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].text}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
         }}
       />
     </Tabs>
-  );
+  )
 }
