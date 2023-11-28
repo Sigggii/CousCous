@@ -54,7 +54,7 @@ server.post(
     getMessaging()
       .send({
         notification: {
-          title: `${sender} will dich umarmen 🫂`,
+          title: `${sender.realName} will dich umarmen 🫂`,
           body: message,
         },
         topic: sender.freeHugTopicSend,

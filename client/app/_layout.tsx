@@ -27,6 +27,12 @@ export {
   ErrorBoundary,
 } from "expo-router"
 
+messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  if (remoteMessage.from?.startsWith("/topics/" + freeHugsTopicPrefix)) {
+    Vibration.vibrate([500, 800, 600, 800])
+  }
+})
+
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)/Free Hugs",
