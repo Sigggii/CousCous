@@ -27,12 +27,6 @@ export {
   ErrorBoundary,
 } from "expo-router"
 
-messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-  if (remoteMessage.from?.startsWith("/topics/" + freeHugsTopicPrefix)) {
-    Vibration.vibrate([500, 800, 600, 800])
-  }
-})
-
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)/Free Hugs",
@@ -48,7 +42,7 @@ export default function RootLayout() {
   })
 
   const [splashMessage, setSpashMessage] = useState<string>()
-  axios.defaults.headers.common["Authorization"] = SECRET
+  axios.defaults.headers.common["Authorization"] = process.env.SECRET
 
   getSplashMessage().then((result) => {
     setSpashMessage(result)
@@ -71,6 +65,23 @@ export default function RootLayout() {
         Vibration.vibrate([500, 800, 600, 800])
       }
     })
+  }, [])
+
+  useEffect(() => {
+    // Assume a message-notification contains a "type" property in the data payload of the screen to open
+
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      Vibration.vibrate([500, 800, 600, 800])
+    })
+
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          Vibration.vibrate([500, 800, 600, 800])
+        }
+      })
   }, [])
 
   if (!loaded || !splashMessage) {

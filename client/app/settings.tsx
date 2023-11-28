@@ -1,14 +1,21 @@
+import messaging from "@react-native-firebase/messaging"
 import { useContext } from "react"
 import { Button, StyleSheet } from "react-native"
 
+import { userConfigs } from "../common/Config"
 import { CurrentUserContext } from "../common/CurrentUserProvider"
 import { View } from "../components/Themed"
 
 export default function ModalScreen() {
-  const { updateCurrentUser } = useContext(CurrentUserContext)
+  const { currentUser, updateCurrentUser } = useContext(CurrentUserContext)
 
   const onLogOut = async () => {
-    await updateCurrentUser(null)
+    if (currentUser) {
+      await messaging().unsubscribeFromTopic(
+        userConfigs[currentUser].freeHugTopicReceive,
+      )
+      await updateCurrentUser(null)
+    }
   }
 
   return (

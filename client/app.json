@@ -3,8 +3,10 @@
     "name": "CousCous",
     "slug": "client",
     "version": "1.0.0",
+    "notification": {
+      "icon": "./assets/images/couscous_icon.png"
+    },
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -19,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "icon": "./assets/images/couscous_icon.png",
       "package": "com.CousCous.CousCous",
       "versionCode": 1,
       "googleServicesFile": "./google-services.json",
