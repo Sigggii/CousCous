@@ -1,4 +1,3 @@
-import { SECRET } from "@env"
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 import messaging from "@react-native-firebase/messaging"
 import {
@@ -42,7 +41,8 @@ export default function RootLayout() {
   })
 
   const [splashMessage, setSpashMessage] = useState<string>()
-  axios.defaults.headers.common["Authorization"] = process.env.SECRET
+  axios.defaults.headers.common["Authorization"] =
+    process.env.EXPO_PUBLIC_SECRET
 
   getSplashMessage().then((result) => {
     setSpashMessage(result)
