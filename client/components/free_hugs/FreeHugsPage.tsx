@@ -1,3 +1,4 @@
+import { EXPO_PUBLIC_SERVER_IP } from "@env"
 import messaging from "@react-native-firebase/messaging"
 import { useContext, useState } from "react"
 import { Image, Pressable, StyleSheet } from "react-native"

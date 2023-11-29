@@ -55,7 +55,7 @@ server.post(
       .send({
         notification: {
           title: message,
-          body: `${sender.realName} will dich umarmen 🫂 \n Hol dir deine Umarmung ab`,
+          body: `${sender.realName} will dich umarmen 🫂 \nHol dir deine Umarmung ab❤️`,
         },
         topic: sender.freeHugTopicSend,
         android: {
