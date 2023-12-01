@@ -61,8 +61,7 @@ server.post(
         android: {
           notification: {
             sound: "default",
-            defaultVibrateTimings: false,
-            vibrateTimingsMillis: [500, 250, 250, 250, 250, 250],
+            defaultVibrateTimings: true,
           },
         },
       })
