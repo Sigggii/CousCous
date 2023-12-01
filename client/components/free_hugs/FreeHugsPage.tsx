@@ -1,7 +1,5 @@
-import { EXPO_PUBLIC_SERVER_IP } from "@env"
-import messaging from "@react-native-firebase/messaging"
 import { useContext, useState } from "react"
-import { Image, Pressable, StyleSheet } from "react-native"
+import { Image, Pressable, StyleSheet, Vibration } from "react-native"
 
 import { userConfigs } from "../../common/Config"
 import { CurrentUserContext } from "../../common/CurrentUserProvider"
@@ -20,6 +18,7 @@ export const FreeHugsPage = () => {
   }
 
   const hugClicked = async (body: FreeHugBody) => {
+    Vibration.vibrate([500, 800, 600, 800])
     giveHug(body)
     setIsHuged(true)
 
