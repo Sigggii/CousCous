@@ -21,6 +21,7 @@ import { getSplashMessage } from "../common/axios/SplashScreenAPI"
 import { freeHugsTopicPrefix } from "../common/models"
 import { CustomSplashScreen } from "../components/common/CustomSplashScreen"
 import { LoginScreen } from "../components/common/LoginScreen"
+import { hello } from "../modules/android-vibration-couscous"
 
 export {
   // Catch any errors thrown by the Layout component.

@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android", "web"],
+  "ios": {
+    "modules": ["AndroidVibrationCouscousModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.androidvibrationcouscous.AndroidVibrationCouscousModule"]
+  }
+}
