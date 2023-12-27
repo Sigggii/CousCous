@@ -2,6 +2,8 @@ package expo.modules.androidvibrationcouscous
 
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import android.os.VibrationEffect
+import android.os.Vibrator
 
 class AndroidVibrationCouscousModule : Module() {
   // Each module class must implement the definition function. The definition consists of components
@@ -22,8 +24,12 @@ class AndroidVibrationCouscousModule : Module() {
     Events("onChange")
 
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
+    Function("vibrate") { (vibrationPattern: LongArray) ->
+      val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+      if(vibrator.hasVibrator()){
+        val vibrationEffect = VibrationEffect.createWaveform(pattern, -1)
+        vibrator.vibrate(vibrationEffect)
+      }
     }
 
     // Defines a JavaScript function that always returns a Promise and whose native code

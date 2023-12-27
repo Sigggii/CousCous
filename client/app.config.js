@@ -24,7 +24,9 @@ export default {
       icon: "./assets/images/couscous_icon.png",
       package: IS_DEV ? "com.CousCous.CousCous.dev" : "com.CousCous.CousCous",
       versionCode: 1,
-      googleServicesFile: "./google-services.json",
+      googleServicesFile: IS_DEV
+        ? "./google-services_dev.json"
+        : "./google-services.json",
       adaptiveIcon: {
         foregroundImage: "./assets/images/couscous_icon.png",
         backgroundColor: "#ffffff",

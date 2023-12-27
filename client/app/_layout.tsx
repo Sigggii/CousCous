@@ -21,7 +21,7 @@ import { getSplashMessage } from "../common/axios/SplashScreenAPI"
 import { freeHugsTopicPrefix } from "../common/models"
 import { CustomSplashScreen } from "../components/common/CustomSplashScreen"
 import { LoginScreen } from "../components/common/LoginScreen"
-import { hello } from "../modules/android-vibration-couscous"
+import { vibrate } from "../modules/android-vibration-couscous"
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -63,7 +63,7 @@ export default function RootLayout() {
   useEffect(() => {
     return messaging().onMessage(async (remoteMessage) => {
       if (remoteMessage.from?.startsWith("/topics/" + freeHugsTopicPrefix)) {
-        Vibration.vibrate([500, 800, 600, 800])
+        vibrate([500, 800, 600, 800])
       }
     })
   }, [])
